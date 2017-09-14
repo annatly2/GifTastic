@@ -17,8 +17,11 @@ function displayGifs(){
       var p = $("<p>").text("Rating: "+rating);
 
       var topicImg = $("<img>");
-      topicImg.attr("src", results[i].images.fixed_height.url);
+      var stillUrl = results[i].images.original_still.url;
+      var animateUrl = results[i].images.fixed_height.url;
 
+      topicImg.attr("src", stillUrl);
+      topicImg.attr("data-state", "still");
       gifDiv.prepend(p);
       gifDiv.prepend(topicImg);
 
@@ -30,13 +33,11 @@ function displayGifs(){
   $("#gifs-appear-here").html("");
 }
 
-
 function renderButtons(){
 
 $("#buttons-view").empty();
 
   for(var i = 0; i < topics.length; i++){
-          console.log("hello");
           var newButton = $("<button>");
           newButton.addClass("topic");
           newButton.attr("data-name", topics[i]);
@@ -59,10 +60,19 @@ $(document).on("click", ".topic", displayGifs);
 renderButtons();
 
 $(".item").on("click", function(){
+    console.log("hello");
+  var state = $(this).attr("data-state");
+  if(state ==="still"){
+    $(this).attr("src", animateUrl);
+    $(this).attr("data-state", "animate");
+  }else{
+    $(this).attr("src", stillUrl);
+    $(this).attr("data-state", "still");
+  }
 
-results[i].images.original_still.url
 
 });
+
 
 
 });
