@@ -13,7 +13,7 @@ function displayGifs(){
     var results = response.data;
     for (var i = 0; i < results.length; i++){
       var gifDiv = $("<div class = 'item'>");
-      var rating = results[i].rating;
+      var rating = results[i].rating.toUpperCase();
       var p = $("<p>").text("Rating: "+rating);
 
       var topicImg = $("<img>");
@@ -29,9 +29,8 @@ function displayGifs(){
       gifDiv.prepend(topicImg);
 
       $("#gifs-appear-here").prepend(gifDiv);
-      topicImg.addClass("playClickedGif");
+      topicImg.addClass("clickGif");
     }
-
   });
 
   $("#gifs-appear-here").html("");
@@ -41,7 +40,7 @@ function changeImg(){
   var animateImg = $(this).attr("playsrc");
   var stopImg = $(this).attr("stopsrc");
 
-    if($(this).attr("playsrc") === $(this).attr("src")){
+  if($(this).attr("playsrc") === $(this).attr("src")){
     $(this).attr("src", stopImg);
   }else{
     $(this).attr("src", animateImg);
@@ -49,32 +48,24 @@ function changeImg(){
 }
 
 function renderButtons(){
-
 $("#buttons-view").empty();
-
   for(var i = 0; i < topics.length; i++){
-          var newButton = $("<button>");
-          newButton.addClass("topic");
-          newButton.attr("data-name", topics[i]);
-          newButton.text(topics[i]);
-          $("#buttons-view").append(newButton);
+      var newButton = $("<button>");
+      newButton.addClass("topic");
+      newButton.attr("data-name", topics[i]);
+      newButton.text(topics[i]);
+      $("#buttons-view").append(newButton);
   }
 }
 
 $("#add-topic").on("click", function(event){
   event.preventDefault();
-
   var newTopic = $("#topic-input").val().trim();
   topics.push(newTopic);
-  console.log(topics);
   renderButtons();
-
 });
 
 $(document).on("click", ".topic", displayGifs);
 renderButtons();
-
-$(document).on("click", ".playClickedGif", changeImg);
-
-
+$(document).on("click", ".clickGif", changeImg);
 });

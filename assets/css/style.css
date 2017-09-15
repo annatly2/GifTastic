@@ -1,3 +1,20 @@
 body{
+
 	background-image: url("../images/gplaypattern.png");
+	font-family: 'Noto Serif', serif;
+}
+
+button{
+	background-color: #c13b32;
+	color: #fceea6;
+	margin: 2px;
+}
+
+#add-topic{
+	background-color: #fceea6;
+	color: #c13b32
+}
+
+#header-image, #topic-form{
+	padding: 15px;
 }
