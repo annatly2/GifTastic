@@ -3,7 +3,7 @@ var topics = ["Master of None", "Aziz Ansari", "Alan Yang", "Lena Waithe", "New 
 
 function displayGifs(){
   var topicName = $(this).attr("data-name");
-  var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topicName + "&api_key=dc6zaTOxFJmzC&limit=10";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicName + "&api_key=dc6zaTOxFJmzC&limit=10";
 
   $.ajax({
           url: queryURL,
@@ -63,6 +63,7 @@ $("#add-topic").on("click", function(event){
   var newTopic = $("#topic-input").val().trim();
   topics.push(newTopic);
   renderButtons();
+  $("#topic-input").val("");
 });
 
 $(document).on("click", ".topic", displayGifs);
